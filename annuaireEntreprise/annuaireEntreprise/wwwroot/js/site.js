@@ -13,13 +13,12 @@ function select(id) {
         var taille = liste.length;
         for (i = 0; i < taille; i++) {
 
-            var test = document.getElementById(i + 1);
+            var li = document.getElementById(i + 1);
 
-
-            if (test != null) {
-                console.log(test);
-                test.style.backgroundColor = 'white';
-                test.style.color = 'black';
+            //Eviter de séléctionner des éléments nulls dans la liste
+            if (li != null) {
+                li.style.backgroundColor = 'white';
+                li.style.color = 'black';
             }
         }
     }
@@ -37,24 +36,34 @@ function select(id) {
 
 
 //fonction qui envoie le formulaire de modification lorsque l'on clique sur modifier
-function modifier() {
+function modifier(methode) {
     var liste = document.getElementsByTagName('li');
     var taille = liste.length;
     for (i = 0; i < taille; i++) {
-        if (document.getElementById(i + 1).style.backgroundColor == "dimgrey") {
-            //Envoyer une requete post avec le nom de la ville et l'id séléctionnées vers le controller site methode add
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'ville';
-            input.value = document.getElementById(i + 1).textContent;
-            document.getElementById('form').appendChild(input);
-            const inputId = document.createElement('input');
-            inputId.type = 'hidden';
-            inputId.name = 'id';
-            inputId.value = document.getElementById(i + 1).id;
-            document.getElementById('form').appendChild(inputId);
-            document.getElementById('form').submit();
+        //Eviter de séléctionner des éléments nulls dans la liste
+        if (document.getElementById(i + 1) != null) {
+            if (document.getElementById(i + 1).style.backgroundColor == "dimgrey") {
+                //Envoyer une requete post avec le nom de la ville et l'id séléctionnées vers le controller site, methode add
+                //changer la méthode si c'est sur le bouton supprimer que l'on a cliqué
+                if (methode != 1) {
+                    document.getElementById("form").action = '/Site/Update';
+                };
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'ville';
+                input.value = document.getElementById(i + 1).textContent;
+                document.getElementById('form').appendChild(input);
+                const inputId = document.createElement('input');
+                inputId.type = 'hidden';
+                inputId.name = 'id';
+
+                inputId.value = document.getElementById(i + 1).id;
+                console.log(document.getElementById(i + 1));
+
+                document.getElementById('form').appendChild(inputId);
+                document.getElementById('form').submit();
+            };
         };
 
-    }
+    };
 }

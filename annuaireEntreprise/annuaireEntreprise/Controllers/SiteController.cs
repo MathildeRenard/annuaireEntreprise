@@ -58,6 +58,14 @@ namespace annuaireEntreprise.Controllers
             return RedirectToAction("Index", "Site");
 
         }
+        public ActionResult Delete(int id)
+
+        {
+            Site site = new Site();
+            site.Delete(id);
+            return RedirectToAction("Index", "Site");
+
+        }
 
     }
     }

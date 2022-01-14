@@ -61,9 +61,15 @@ namespace annuaireEntreprise.Models
             command.Dispose();
             connection.Close();
         }
-        public void Delete()
+        public void Delete(int id)
         {
-
+            request = "DELETE FROM site WHERE id_site=@id";
+            connection.Open();
+            command = new MySqlCommand(request, connection);
+            command.Parameters.Add(new MySqlParameter("@id", id));
+            command.ExecuteScalar();
+            command.Dispose();
+            connection.Close();
         }
         public void Update(string ville, int id)
         {
