@@ -60,5 +60,6 @@ C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\
 C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Site\AdminSite.cshtml.g.cs
 C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Employee\AdminEmployee.cshtml.g.cs
 C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Service\AdminService.cshtml.g.cs
-C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Site\Add.cshtml.g.cs
 C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Service\Add.cshtml.g.cs
+C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Site\Update.cshtml.g.cs
+C:\Users\renar\Documents\ProjetIndividuel\annuaireEntreprise\annuaireEntreprise\annuaireEntreprise\obj\Debug\net5.0\Razor\Views\Site\Add.cshtml.g.cs

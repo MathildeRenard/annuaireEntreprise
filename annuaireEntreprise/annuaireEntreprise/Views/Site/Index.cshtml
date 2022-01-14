@@ -1,4 +1,5 @@
-﻿<div class="input-group rounded d-flex">
+﻿@model List<Site>
+<div class="input-group rounded d-flex">
     <div class="flex-column">
         <h1 class="text-center">Rechercher un site</h1>
         <div class="d-inline-flex">
@@ -9,3 +10,34 @@
         </div>
     </div>
 </div>
+<div id="listeSites"></div>
+<ul class="list-group list-group-flush my-5">
+
+    @foreach (Site s in @Model)
+    {
+        <div class="site">
+        <li id="@s.IdSite" onclick="select('@s.IdSite')" class="list-group-item">@s.NameSite</li>
+    </div>
+        }
+        
+    </ul>
+<form id="form" class="container" asp-controller="Site" asp-action="update" method="post">
+</form>
+        <div id="butons">
+            <button type="button" class="btn btn-outline-dark">Ajouter</button>
+            <button type="button" class="btn btn-outline-dark" onclick="modifier()">Modifier</button>
+            <button type="button" class="btn btn-outline-dark">Supprimer</button>
+        </div>
+        <style>
+            /*Css du dossier Site, page Index*/
+            .site > li:hover {
+                cursor: pointer;
+                background-color: dimgray;
+                color: white;
+            }
+
+            .site > li {
+                background-color: transparent;
+            }
+        </style>
+
