@@ -48,9 +48,18 @@ namespace annuaireEntreprise.Models
             return sites;
         }
 
-        public void Create()
+        public void Create(string ville)
         {
+            request = "INSERT INTO site (name_site) VALUE(@nameSite) ";
+            connection.Open();
+            command = new MySqlCommand(request, connection);
+            command.Parameters.Add(new MySqlParameter("@nameSite", ville));
 
+            command.ExecuteScalar();
+
+
+            command.Dispose();
+            connection.Close();
         }
         public void Delete()
         {

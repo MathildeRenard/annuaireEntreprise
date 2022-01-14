@@ -44,8 +44,20 @@ namespace annuaireEntreprise.Controllers
             site.Update(ville, id);
             return RedirectToAction("Index","Site");
         }
+        public ActionResult Add()
 
+        {
+            return View();
 
+        }
+        public ActionResult sendNew(string ville)
+
+        {
+            Site site = new Site();
+            site.Create(ville);
+            return RedirectToAction("Index", "Site");
+
+        }
 
     }
     }
