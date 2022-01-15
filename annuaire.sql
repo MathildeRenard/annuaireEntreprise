@@ -7,16 +7,9 @@ CREATE TABLE SITE(
 CREATE TABLE SERVICE(
    id_service INT NOT NULL AUTO_INCREMENT,
    name_service VARCHAR(50),
-   id_site INT,
-   PRIMARY KEY(id_service),
-   FOREIGN KEY(id_site) REFERENCES SITE(id_site)
+   PRIMARY KEY(id_service)
 );
 
-CREATE TABLE ROLE(
-   id_role INT NOT NULL AUTO_INCREMENT,
-   role_name VARCHAR(50),
-   PRIMARY KEY(id_role)
-);
 
 CREATE TABLE PERSON(
    id_person INT NOT NULL AUTO_INCREMENT,
@@ -26,9 +19,9 @@ CREATE TABLE PERSON(
    mobile_phone INT,
    mail VARCHAR(50),
    password VARCHAR(50),
-   id_role INT,
+   id_site INT,
    id_service INT,
    PRIMARY KEY(id_person),
-   FOREIGN KEY(id_role) REFERENCES ROLE(id_role),
-   FOREIGN KEY(id_service) REFERENCES SERVICE(id_service)
+   FOREIGN KEY(id_service) REFERENCES SERVICE(id_service),
+   FOREIGN KEY(id_site) REFERENCES SITE(id_site)
 );
