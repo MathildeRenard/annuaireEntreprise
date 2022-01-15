@@ -1,0 +1,19 @@
+﻿<div class="container">
+    <h1 class="text-center">Modification service</h1>
+    <form id="form" class="container" asp-controller="Service" asp-action="sendChanges" method="post">
+        <fieldset>
+            <div id="formulaire" class="text-center d-flex flex-column m-auto">
+
+                <div class="form-group d-inline-flex">
+                    <label for="email" class="mr-4 w-25">Service</label>
+                    <input type="text" name="nameservice" class="form-control w-25" placeholder="service" value="@ViewData["service"]">
+                    <input type="hidden" name="id" class="form-control w-25" value='@ViewData["id"]'>
+
+                </div>
+
+            </div>
+            <div id="Button" class="text-center"><button type="submit" class="btn btn-outline-secondary ml-4 mr-4">Modifier</button></div>
+
+        </fieldset>
+    </form>
+</div>
