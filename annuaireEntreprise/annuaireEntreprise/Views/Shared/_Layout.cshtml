@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,6 +31,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Login">Administrateur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">@ViewData["firstnameSession"]</a>
+                            <a class="nav-link text-dark">@ViewData["lastnameSession"]</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Logout">Déconnexion</a>
                         </li>
                     </ul>
                 </div>

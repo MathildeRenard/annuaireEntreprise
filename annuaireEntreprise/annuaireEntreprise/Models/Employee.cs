@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
@@ -127,10 +128,60 @@ namespace annuaireEntreprise.Models
             command.Dispose();
             connection.Close();
         }
-        public void Login()
+        //methode qui récupére les saisies du formulaire de connexion et verifie la validité des informations dans la base de données
+        public Employee Login(string mail, string password)
         {
+                Employee employee = null;
+                //Faire un select si le mot de passe et le login correspondent à ceux dans la base de données.
+                request = "SELECT Password,firstname,lastname FROM person WHERE mail = @mail";
+                connection = Db.Connection;
+                command = new MySqlCommand(request, connection);
+                command.Parameters.Add(new MySqlParameter("@mail", mail));
 
-        }
+                connection.Open();
+                MySqlDataReader resultatRequete = command.ExecuteReader();
+                resultatRequete.Read();
+
+                //S'il y a eu une erreur lors de la saisie du login, le résultat de la requête sql lèvera une exception
+                try
+                {
+                    String SavedPasswordHash = resultatRequete["Password"].ToString();
+                    
+                    //Vérifier si le mot de passe correspond à celui de la base de données
+                    byte[] hashBytes = Convert.FromBase64String(SavedPasswordHash);
+                    byte[] salt = new byte[16];
+                    Array.Copy(hashBytes, 0, salt, 0, 16);
+                    var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000);
+                    byte[] hash = pbkdf2.GetBytes(20);
+
+                    for (int i = 0; i < 20; i++)
+                        if (hashBytes[i + 16] == hash[i])
+                        {
+                            employee = new Employee()
+                            {
+                                firstname= resultatRequete["firstname"].ToString(),
+                                lastname = resultatRequete["lastname"].ToString(),
+
+                            };
+
+                        }
+                }
+                //En cas d'erreur sur le login saisi, la variable employee restera à sa valeur initiale "null" et la vue renverra un message d'erreur
+                catch (MySqlException)
+                {
+
+                }
+                catch (ArgumentNullException)
+                {
+
+                }
+                command.Dispose();
+                connection.Close();
+
+                return employee;
+            }
+
+        
         public void Logout()
         {
 

@@ -16,6 +16,10 @@ namespace annuaireEntreprise.Controllers
         {
 
             Employee employee = new Employee();
+            //variables de sessions envoyée au layout(NavBar)
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = null;
 
             return View(employee.GetEmployees());
         }
@@ -34,6 +38,12 @@ namespace annuaireEntreprise.Controllers
             ViewData["idEmployee"] = idEmployee;
             ViewData["idsite"] = idsite;
             ViewData["idservice"] = idservice;
+
+            //variables de sessions envoyée au layout(NavBar)
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
             Site siteListe = new Site();
             Service serviceListe = new Service();
             ViewModelEmployee viewModelEmployee = new ViewModelEmployee()
@@ -54,6 +64,11 @@ namespace annuaireEntreprise.Controllers
         }
         public ActionResult Add()
         {
+            //variables de sessions envoyée au layout(NavBar)
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
             //envoyer les informations pour remplir les input avec liste déroulante
             Site siteListe = new Site();
             Service serviceListe = new Service();
@@ -81,11 +96,28 @@ namespace annuaireEntreprise.Controllers
 
         }
         // GET: EmployeesController1/Create
+        public ActionResult SendLogin(string mail,string password)
+        {
+            Employee employee = new Employee();
+            Employee result = employee.Login(mail, password);
+            if (result != null)
+            {
+                HttpContext.Session.SetString("firstname", result.Firstname);
+                HttpContext.Session.SetString("lastname", result.Lastname);
+                HttpContext.Session.SetString("isLogged", "true");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Login()
         {
             return View();
         }
-
+        public ActionResult Logout()
+        {
+            //HttpContext.Session.clear();
+            return View();
+        }
         public ActionResult Result()
         {
             return View();

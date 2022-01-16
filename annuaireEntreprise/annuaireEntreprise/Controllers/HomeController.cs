@@ -1,5 +1,6 @@
 ﻿using annuaireEntreprise.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,12 @@ namespace annuaireEntreprise.Controllers
 
         public IActionResult Index()
         {
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = null;
             return View();
         }
-
+      
         public IActionResult Privacy()
         {
             return View();

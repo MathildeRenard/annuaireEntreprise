@@ -13,25 +13,21 @@ namespace annuaireEntreprise.Controllers
         // GET: ServiceController1
         public IActionResult Index()
         {
-
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
             Service service = new Service();
 
             return View(service.GetServices());
         }
 
 
-        public ActionResult Result()
-        {
-            return View();
-        }
-
-        public ActionResult AdminService()
-        {
-            return View();
-        }
         public ActionResult Add()
 
         {
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
             return View();
 
         }
@@ -47,7 +43,10 @@ namespace annuaireEntreprise.Controllers
         public ActionResult Update(String nameservice, int id)
 
         {
-            
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
             ViewData["service"] = nameservice;
             ViewData["id"] = id;
             return View();

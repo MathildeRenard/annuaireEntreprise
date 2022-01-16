@@ -13,7 +13,9 @@ namespace annuaireEntreprise.Controllers
         // GET: SiteController
         public IActionResult Index()
         {
-
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
             Site site = new Site();
            
             return View(site.GetSites());
@@ -25,6 +27,12 @@ namespace annuaireEntreprise.Controllers
             //envoyer le nom de la ville, et l'id récupérée par le formulaire, à la vue de modification
             ViewData["ville"] = ville;
             ViewData["id"] = id;
+
+            //variables de sessions envoyée au layout(NavBar)
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
             return View();
 
         }
@@ -38,6 +46,10 @@ namespace annuaireEntreprise.Controllers
         public ActionResult Add()
 
         {
+            //variables de sessions envoyée au layout(NavBar)
+            ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
+            ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
             return View();
 
         }
