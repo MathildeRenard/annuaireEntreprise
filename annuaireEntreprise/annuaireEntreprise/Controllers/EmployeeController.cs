@@ -71,6 +71,15 @@ namespace annuaireEntreprise.Controllers
             employee.Create(firstname, lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
             return RedirectToAction("Index", "Employee");
         }
+
+        public ActionResult Delete(int idEmployee)
+
+        {
+            Employee employee = new Employee();
+            employee.Delete(idEmployee);
+            return RedirectToAction("Index", "Employee");
+
+        }
         // GET: EmployeesController1/Create
         public ActionResult Login()
         {

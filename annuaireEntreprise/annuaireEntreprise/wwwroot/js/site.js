@@ -69,7 +69,7 @@ function sendData(chemin,data) {
 
 }
 //fonction qui envoie le formulaire de modification lorsque l'on clique sur modifierb spécifique à la page employées
-function sendDataEmployees() {
+function sendDataEmployees(methode) {
     var liste = document.getElementsByTagName('li');
     var taille = liste.length;
     for (i = 0; i < taille; i++) {
@@ -81,7 +81,7 @@ function sendDataEmployees() {
             if (li.style.backgroundColor == "dimgrey") {
                 console.log(li.childNodes[12].childNodes);
 
-                document.getElementById("form").action = '/Employee/Update';
+                document.getElementById("form").action = '/Employee/'+methode;
 
                 const idEmployee = document.createElement('input');
                 idEmployee.type = 'hidden';
@@ -168,8 +168,5 @@ function deroulant(id) {
 }
 
 function ChangeValue(element, id) {
-    console.log("test");
     document.getElementById('id' + element).value = id;
-    
-
 }
