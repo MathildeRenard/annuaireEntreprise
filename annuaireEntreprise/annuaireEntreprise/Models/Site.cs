@@ -11,7 +11,6 @@ namespace annuaireEntreprise.Models
     {
         private int idSite;
         private string nameSite;
-        private Db db;
         private string request;
         private  MySqlConnection connection = Db.Connection;
         private MySqlCommand command;

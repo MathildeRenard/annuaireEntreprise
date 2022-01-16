@@ -19,15 +19,6 @@ namespace annuaireEntreprise.Controllers
             return View(site.GetSites());
         }
 
-
-        public ActionResult Result()
-        {
-            return View();
-        }
-        public ActionResult AdminSite()
-        {
-            return View();
-        }
         public ActionResult Update(String ville,int id)
 
         {

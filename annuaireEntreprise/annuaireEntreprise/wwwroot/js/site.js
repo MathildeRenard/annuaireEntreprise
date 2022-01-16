@@ -36,7 +36,7 @@ function select(id) {
 
 
 //fonction qui envoie le formulaire de modification lorsque l'on clique sur modifier
-function modifier(methode) {
+function sendData(chemin,data) {
     var liste = document.getElementsByTagName('li');
     var taille = liste.length;
     for (i = 0; i < taille; i++) {
@@ -45,12 +45,12 @@ function modifier(methode) {
             if (document.getElementById(i + 1).style.backgroundColor == "dimgrey") {
                 //Envoyer une requete post avec le nom de la ville et l'id séléctionnées vers le controller site, methode add
                 //changer la méthode si c'est sur le bouton supprimer que l'on a cliqué
-                if (methode != 1) {
-                    document.getElementById("form").action = '/Site/Update';
-                };
+               
+                document.getElementById("form").action = chemin;
+                
                 const input = document.createElement('input');
                 input.type = 'hidden';
-                input.name = 'ville';
+                input.name = data;
                 input.value = document.getElementById(i + 1).textContent;
                 document.getElementById('form').appendChild(input);
                 const inputId = document.createElement('input');
@@ -58,7 +58,7 @@ function modifier(methode) {
                 inputId.name = 'id';
 
                 inputId.value = document.getElementById(i + 1).id;
-                console.log(document.getElementById(i + 1));
+                
 
                 document.getElementById('form').appendChild(inputId);
                 document.getElementById('form').submit();
@@ -66,4 +66,110 @@ function modifier(methode) {
         };
 
     };
+
+}
+//fonction qui envoie le formulaire de modification lorsque l'on clique sur modifierb spécifique à la page employées
+function sendDataEmployees() {
+    var liste = document.getElementsByTagName('li');
+    var taille = liste.length;
+    for (i = 0; i < taille; i++) {
+        var li = document.getElementById(i + 1);
+        //Eviter de séléctionner des éléments nulls dans la liste
+        if (li != null) {
+            
+            //prendre les informations uniqument dans l'élément séléctionné
+            if (li.style.backgroundColor == "dimgrey") {
+                console.log(li.childNodes[12].childNodes);
+
+                document.getElementById("form").action = '/Employee/Update';
+
+                const idEmployee = document.createElement('input');
+                idEmployee.type = 'hidden';
+                idEmployee.name = "idEmployee";
+                idEmployee.value = li.id;
+                document.getElementById('form').appendChild(idEmployee);
+
+                const firstname = document.createElement('input');
+                firstname.type = 'hidden';
+                firstname.name = "firstname";
+                firstname.value = li.childNodes[2].textContent;
+                document.getElementById('form').appendChild(firstname);
+
+                const lastname = document.createElement('input');
+                lastname.type = 'hidden';
+                lastname.name = "lastname";
+                lastname.value = li.childNodes[6].textContent;
+                document.getElementById('form').appendChild(lastname);
+
+                const phone = document.createElement('input');
+                phone.type = 'hidden';
+                phone.name = "phone";
+                phone.value = li.childNodes[12].childNodes[2].textContent;
+                document.getElementById('form').appendChild(phone);
+
+                const mobilePhone = document.createElement('input');
+                mobilePhone.type = 'hidden';
+                mobilePhone.name = "mobilePhone";
+                mobilePhone.value = li.childNodes[12].childNodes[6].textContent;
+                document.getElementById('form').appendChild(mobilePhone);
+
+                const mail = document.createElement('input');
+                mail.type = 'hidden';
+                mail.name = "mail";
+                mail.value = li.childNodes[12].childNodes[10].textContent;
+                document.getElementById('form').appendChild(mail);
+
+                const service = document.createElement('input');
+                service.type = 'hidden';
+                service.name = "service";
+                service.value = li.childNodes[12].childNodes[14].textContent;
+                document.getElementById('form').appendChild(service);
+
+                const idservice = document.createElement('input');
+                idservice.type = 'hidden';
+                idservice.name = "idservice";
+                idservice.value = li.childNodes[12].childNodes[14].id;
+                document.getElementById('form').appendChild(idservice);
+
+                const site = document.createElement('input');
+                site.type = 'hidden';
+                site.name = "site";
+                site.value = li.childNodes[12].childNodes[18].textContent;
+                document.getElementById('form').appendChild(site);
+
+                const idsite = document.createElement('input');
+                idsite.type = 'hidden';
+                idsite.name = "idsite";
+                idsite.value = li.childNodes[12].childNodes[18].id;
+                document.getElementById('form').appendChild(idsite);
+
+                document.getElementById('form').submit();
+                //Envoyer une requete post avec le nom de la ville et l'id séléctionnées vers le controller site, methode add
+                //changer la méthode si c'est sur le bouton supprimer que l'on a cliqué
+
+            };
+        };
+
+    };
+
+}
+//fonction de menu déroulant sur la page des employés
+function deroulant(id) {
+    if (document.getElementById('informations+' + id).style.display === 'none') {
+        document.getElementById('informations+' + id).style.display = 'block';
+        document.getElementById('down').style.display = 'none';
+        document.getElementById('up').style.display = 'block';
+    } else {
+        document.getElementById('informations+' + id).style.display = 'none';
+        document.getElementById('down').style.display = 'block';
+        document.getElementById('up').style.display = 'none';
+    }
+   
+}
+
+function ChangeValue(element, id) {
+    console.log("test");
+    document.getElementById('id' + element).value = id;
+    
+
 }

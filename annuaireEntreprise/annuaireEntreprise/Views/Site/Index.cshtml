@@ -21,12 +21,12 @@
         }
         
     </ul>
-<form id="form" class="container" action='@Url.Action("Delete", "Site")', method="post">
+<form id="form" class="container" action='#', method="post">
 </form>
         <div id="butons">
             <a asp-controller="Site" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
-            <button type="button" class="btn btn-outline-dark" onclick="modifier(0)">Modifier</button>
-            <button type="button" class="btn btn-outline-dark" onclick="modifier(1)">Supprimer</button>
+            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Update','ville')">Modifier</button>
+            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Delete','ville')">Supprimer</button>
 </div>
         <style>
             /*Css du dossier Site, page Index*/

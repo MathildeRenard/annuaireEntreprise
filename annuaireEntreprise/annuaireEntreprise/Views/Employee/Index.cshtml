@@ -1,22 +1,57 @@
-﻿<div class="container">
-    <h1 class="text-center">Connexion administrateur</h1>
-    <form>
-        <fieldset>
-            <div id="formulaire" class="text-center d-flex flex-column m-auto" >
+﻿
+@model List<Employee>
 
-                <div class="form-group d-inline-flex">
-                    <label for="email" class="mr-4 w-25">Adresse e-mail</label>
-                    <input type="email" class="form-control w-25" id="mail" placeholder="mail">
-                </div>
-
-                <div class="form-group d-inline-flex">
-                    <label for="password" class="mr-4 w-25">Mot de passe</label>
-                    <input type="password" class="form-control w-25" id="password" placeholder="password">
-                </div>
+    <div class="input-group rounded d-flex">
+        <div class="flex-column">
+            <h1 class="text-center">Rechercher un employé</h1>
+            <div class="d-inline-flex">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                       aria-describedby="search-addon" />
+                <div id="Button" class="text-center"><button type="button" class="btn btn-outline-secondary ml-4 mr-4" asp-controller="Site" asp-action="Result">Chercher</button></div>
             </div>
-            <div id="Button"class="text-center"><button type="button" class="btn btn-outline-secondary ml-4 mr-4">Connexion</button></div>
+        </div>
+       
+        <div id="listeSites"></div>
+        <ul class="list-group list-group-flush my-5">
 
-        </fieldset>
-    </form>
-</div>
+            @foreach (Employee e in @Model)
+            {
+                <div class="site" onclick="deroulant(@e.IdEmployee)">
+                <li id="@e.IdEmployee" onclick="select('@e.IdEmployee')" class="list-group-item">
+
+                    <p><div class="donnee">@e.Firstname</div></p>
+                    <p><div class="donnee">@e.Lastname</div></p>
+                    <i id="down" class="bi bi-caret-down-fill"></i><i id="up" class="bi bi-caret-up-fill" style="display:none"></i>
+                    <ul id="informations+@e.IdEmployee" style="display:none">
+                        <p>Numéro de téléphonne fixe : <div class="donnee">@e.Phone</div></p>
+                        <p>Numéro de téléphonne portable : <div class="donnee">@e.MobilePhone</div></p>
+                        <p>adresse e-mail : <div class="donnee">@e.Mail</div></p>
+                        <p>Service : <div id="@e.Service.IdService" class="donnee">@e.Service.NameService</div></p>
+                        <p>Site : <div id="@e.Site.IdSite" class="donnee">@e.Site.NameSite</div></p>
+                    </ul>
+                </li>
+        </div>
+    }
+
+            </ul>
+            <form id="form" class="container" action='#' , method="post">
+            </form>
+            <div id="butons">
+                <a asp-controller="Site" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
+                <button type="button" class="btn btn-outline-dark" onclick="sendDataEmployees()">Modifier</button>
+                <button type="button" class="btn btn-outline-dark" onclick="sendDataEmployees()">Supprimer</button>
+            </div>
+            <style>
+                /*Css du dossier Site, page Index*/
+                .site > li:hover {
+                    cursor: pointer;
+                    background-color: dimgray;
+                    color: white;
+                }
+
+                .site > li {
+                    background-color: transparent;
+                }
+            </style>
+
 
