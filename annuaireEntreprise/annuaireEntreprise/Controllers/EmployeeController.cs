@@ -113,14 +113,14 @@ namespace annuaireEntreprise.Controllers
         {
             return View();
         }
-        public ActionResult Logout()
-        {
-            //HttpContext.Session.clear();
-            return View();
-        }
         public ActionResult Result()
         {
             return View();
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult EmployeeSheet()
         {
