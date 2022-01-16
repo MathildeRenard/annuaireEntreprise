@@ -3,7 +3,7 @@
     <div class="flex-column">
         <h1 class="text-center">Rechercher un service</h1>
         <div class="d-inline-flex">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+            <input type="search" id="searchbar" onkeyup="search()" class="form-control rounded" placeholder="Search" aria-label="Search"
                    aria-describedby="search-addon" />
             <div id="Button" class="text-center"><button type="button" class="btn btn-outline-secondary ml-4 mr-4" asp-controller="Site" asp-action="Result">Chercher</button></div>
 
@@ -16,6 +16,7 @@
     @foreach (Service s in @Model)
     {
         <div class="site">
+
         <li id="@s.IdService" onclick="select('@s.IdService')" class="list-group-item">@s.NameService</li>
         </div>
     }
