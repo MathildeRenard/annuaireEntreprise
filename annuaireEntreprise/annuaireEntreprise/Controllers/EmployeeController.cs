@@ -19,7 +19,7 @@ namespace annuaireEntreprise.Controllers
             //variables de sessions envoyée au layout(NavBar)
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
-            ViewData["isLogged"] = null;
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged"); ;
 
             return View(employee.GetEmployees());
         }

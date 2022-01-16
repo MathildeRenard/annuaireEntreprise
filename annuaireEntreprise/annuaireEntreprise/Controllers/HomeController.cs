@@ -21,9 +21,11 @@ namespace annuaireEntreprise.Controllers
 
         public IActionResult Index()
         {
+            
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
-            ViewData["isLogged"] = null;
+
+            ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
             return View();
         }
       

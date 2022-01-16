@@ -3,7 +3,7 @@
     <div class="flex-column">
         <h1 class="text-center">Rechercher un site</h1>
         <div class="d-inline-flex">
-            <input type="search" class="form-control rounded" placeholder="Search" id="searchbar" onkeyup="search()"aria-label="Search"
+            <input type="search" class="form-control rounded" placeholder="Search" id="searchbar" onkeyup="search()" aria-label="Search"
                    aria-describedby="search-addon" />
             <div id="Button" class="text-center"><button type="button" class="btn btn-outline-secondary ml-4 mr-4" asp-controller="Site" asp-action="Result">Chercher</button></div>
 
@@ -16,29 +16,32 @@
     @foreach (Site s in @Model)
     {
         <div class="site">
-            
-        <li id="@s.IdSite" onclick="select('@s.IdSite')" class="list-group-item">@s.NameSite</li>
-    </div>
-        }
-        
-    </ul>
-<form id="form" class="container" action='#', method="post">
-</form>
-        <div id="butons">
-            <a asp-controller="Site" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
-            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Update','ville')">Modifier</button>
-            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Delete','ville')">Supprimer</button>
-</div>
-        <style>
-            /*Css du dossier Site, page Index*/
-            .site > li:hover {
-                cursor: pointer;
-                background-color: dimgray;
-                color: white;
-            }
 
-            .site > li {
-                background-color: transparent;
-            }
-        </style>
+        <li id="@s.IdSite" onclick="select('@s.IdSite')" class="list-group-item">@s.NameSite</li>
+        </div>
+    }
+
+</ul>
+<form id="form" class="container" action='#' , method="post">
+</form>
+@if (ViewData["isLogged"] != null)
+{
+    <div id="butons">
+        <a asp-controller="Site" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
+        <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Update','ville')">Modifier</button>
+        <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Delete','ville')">Supprimer</button>
+    </div>
+}
+    <style>
+        /*Css du dossier Site, page Index*/
+        .site > li:hover {
+            cursor: pointer;
+            background-color: dimgray;
+            color: white;
+        }
+
+        .site > li {
+            background-color: transparent;
+        }
+    </style>
 

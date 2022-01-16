@@ -29,18 +29,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Site" asp-action="Index">Sites</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Login">Administrateur</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark">@ViewData["firstnameSession"]</a>
-                            <a class="nav-link text-dark">@ViewData["lastnameSession"]</a>
+
+                        <li class="nav-item ml-5">
+                            <a class="nav-link text-dark">@ViewData["firstnameSession"] @ViewData["lastnameSession"]</a>
+                            
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Logout">Déconnexion</a>
-                        </li>
-                    </ul>
+                            
+                            @if (ViewData["isLogged"] != null)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Logout">Déconnexion</a>}
+                            else
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Login">Administrateur</a>
+                            </li>
+                            }
+                            </li>
+                        </ul>
                 </div>
             </div>
         </nav>

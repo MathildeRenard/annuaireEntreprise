@@ -7,10 +7,11 @@
     <h1 class="display-4">Annuaire de l'entreprise</h1>
     <p>Rechercher des services, des employés ou des sites.</p>
     <div id=" buttons">
-        <button type="button" class="btn btn-outline-secondary ml-4 mr-4">Services</button>
-        <button type="button" class="btn btn-outline-secondary ml-4 mr-4">Employés</button>
-        <button type="button" class="btn btn-outline-secondary ml-4 mr-4">Sites</button>
-    </div>
+        <a asp-controller="Service" asp-action="Index"><button type="button" class="btn btn-outline-secondary ml-4 mr-4">Services</button></a>
+        <a asp-controller="Employee" asp-action="Index">
+            <button type="button" class="btn btn-outline-secondary ml-4 mr-4" >Employés</button></a>
+            <a asp-controller="Site" asp-action="Index"><button type="button" class="btn btn-outline-secondary ml-4 mr-4">Sites</button></a>
+</div>
 </div>
 
 
