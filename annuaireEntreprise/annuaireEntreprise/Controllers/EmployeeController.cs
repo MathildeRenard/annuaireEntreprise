@@ -50,9 +50,27 @@ namespace annuaireEntreprise.Controllers
         {
             Employee employee= new Employee();
             employee.Update(firstname,lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
-            return RedirectToAction("Index", "Service");
+            return RedirectToAction("Index", "Employee");
         }
+        public ActionResult Add()
+        {
+            //envoyer les informations pour remplir les input avec liste déroulante
+            Site siteListe = new Site();
+            Service serviceListe = new Service();
+            ViewModelEmployee viewModelEmployee = new ViewModelEmployee()
+            {
+                listeSites = siteListe.GetSites(),
+                listeServices = serviceListe.GetServices()
+            };
+            return View(viewModelEmployee);
+        }
+        public ActionResult sendnew(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite)
 
+        {
+            Employee employee = new Employee();
+            employee.Create(firstname, lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
+            return RedirectToAction("Index", "Employee");
+        }
         // GET: EmployeesController1/Create
         public ActionResult Login()
         {

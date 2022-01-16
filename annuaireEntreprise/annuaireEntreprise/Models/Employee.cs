@@ -74,13 +74,31 @@ namespace annuaireEntreprise.Models
             connection.Close();
             return employees;
         }
-        public void Create()
+        public void Create(string firstname, string lastname, int phone, int mobilePhone, string mail, int idEmployee, int idservice, int idsite)
         {
 
+            request = "INSERT INTO person (firstname,lastname,phone,mobile_phone,mail,id_site,id_service) VALUE(@firstname,@lastname,@phone,@mobilePhone,@mail,@idSite,@idService) ";
+            connection.Open();
+            command = new MySqlCommand(request, connection);
+            command.Parameters.Add(new MySqlParameter("@firstname", firstname));
+            command.Parameters.Add(new MySqlParameter("@lastname", lastname));
+            command.Parameters.Add(new MySqlParameter("@phone", phone));
+            command.Parameters.Add(new MySqlParameter("@mobilePhone", mobilePhone));
+            command.Parameters.Add(new MySqlParameter("@mail", mail));
+            command.Parameters.Add(new MySqlParameter("@idSite", idsite));
+            command.Parameters.Add(new MySqlParameter("@idService", idservice));
+            command.Parameters.Add(new MySqlParameter("@idPerson", idEmployee));
+
+
+            command.ExecuteScalar();
+
+
+            command.Dispose();
+            connection.Close();
         }
         public void Update(string firstname, string lastname, int phone, int mobilePhone, string mail, int idEmployee, int idservice, int idsite)
         {
-            request = "UPDATE person SET firstname=@firstname,lastname=@lastname,phone=@phone,mobile_phone=@mobilePhone,mail=@mail,id_site=@idSite,id_service=@idService,password=null WHERE id_person=@idPerson ";
+            request = "UPDATE person SET firstname=@firstname,lastname=@lastname,phone=@phone,mobile_phone=@mobilePhone,mail=@mail,id_site=@idSite,id_service=@idService WHERE id_person=@idPerson ";
             connection.Open();
             command = new MySqlCommand(request, connection);
             command.Parameters.Add(new MySqlParameter("@firstname", firstname));
