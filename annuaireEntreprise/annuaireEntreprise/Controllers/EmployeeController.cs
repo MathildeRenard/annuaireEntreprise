@@ -24,7 +24,7 @@ namespace annuaireEntreprise.Controllers
             return View(employee.GetEmployees());
         }
 
-        public ActionResult Update(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite)
+        public ActionResult Update(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite,string message)
 
         {
             //envoyer le nom de la ville, et l'id récupérée par le formulaire, à la vue de modification
@@ -38,6 +38,8 @@ namespace annuaireEntreprise.Controllers
             ViewData["idEmployee"] = idEmployee;
             ViewData["idsite"] = idsite;
             ViewData["idservice"] = idservice;
+
+            ViewData["message"] = message;
 
             //variables de sessions envoyée au layout(NavBar)
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
@@ -58,17 +60,30 @@ namespace annuaireEntreprise.Controllers
         public ActionResult sendChanges(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite)
 
         {
-            Employee employee= new Employee();
-            employee.Update(firstname,lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
-            return RedirectToAction("Index", "Employee");
+
+            //s'il ya eu une erreur
+            if (firstname == null|lastname==null|phone==0|mobilePhone==0|mail==null)
+            {// envoyer actualliser le message dans la vue
+
+                return RedirectToAction("Update", "Employee", new { message = "sasie incorrecte", idEmployee = idEmployee });
+            }
+            else
+            {
+                Employee employee = new Employee();
+                employee.Update(firstname, lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
+                return RedirectToAction("Index", "Employee");
+            }
+
+            
         }
-        public ActionResult Add()
+        public ActionResult Add(string message)
         {
             //variables de sessions envoyée au layout(NavBar)
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
             ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
 
+            ViewData["message"] = message;
             //envoyer les informations pour remplir les input avec liste déroulante
             Site siteListe = new Site();
             Service serviceListe = new Service();
@@ -82,9 +97,20 @@ namespace annuaireEntreprise.Controllers
         public ActionResult sendnew(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite)
 
         {
-            Employee employee = new Employee();
-            employee.Create(firstname, lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
-            return RedirectToAction("Index", "Employee");
+
+            //s'il ya eu une erreur
+            if (firstname == null | lastname == null | phone == 0 | mobilePhone == 0 | mail == null)
+            {
+                
+                return RedirectToAction("Add", "Employee", new { message = "sasie incorrecte" });
+            }
+            else
+            {
+                Employee employee = new Employee();
+                employee.Create(firstname, lastname, phone, mobilePhone, mail, idEmployee, idservice, idsite);
+                return RedirectToAction("Index", "Employee");
+            }
+       
         }
 
         public ActionResult Delete(int idEmployee)
