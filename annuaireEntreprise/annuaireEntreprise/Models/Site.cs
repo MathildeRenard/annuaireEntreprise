@@ -60,15 +60,29 @@ namespace annuaireEntreprise.Models
             command.Dispose();
             connection.Close();
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            bool error = false;
             request = "DELETE FROM site WHERE id_site=@id";
             connection.Open();
             command = new MySqlCommand(request, connection);
             command.Parameters.Add(new MySqlParameter("@id", id));
-            command.ExecuteScalar();
+            try
+            {
+                command.ExecuteScalar();
+
+
+            }
+            //Si l'on essaie de supprimer un site surlequel des personnes sont affiliées, le sql renverra une erreur.
+            
+            catch (MySqlException)
+            {
+                error = true;
+            }
+            
             command.Dispose();
             connection.Close();
+            return error;
         }
         public void Update(string ville, int id)
         {

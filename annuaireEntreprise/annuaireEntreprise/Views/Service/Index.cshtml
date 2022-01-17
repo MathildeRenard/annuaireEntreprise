@@ -24,14 +24,21 @@
 </ul>
 <form id="form" class="container" action='@Url.Action("Delete", "Site")' , method="post">
 </form>
-@if (ViewData["isLogged"] != null)
-{
-    <div id="butons">
-        <a asp-controller="Service" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
-        <button type="button" class="btn btn-outline-dark" onclick="sendData('/Service/Update','nameservice')">Modifier</button>
-        <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Delete','nameservice')">Supprimer</button>
-    </div>
-}
+@if (ViewData["message"] != null)
+            {
+<div class="alert alert-danger" role="alert">
+    @ViewData["message"]
+</div>
+            }
+
+    @if (ViewData["isLogged"] != null)
+    {
+        <div id="butons">
+            <a asp-controller="Service" asp-action="Add"><button type="button" class="btn btn-outline-dark">Ajouter</button></a>
+            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Service/Update','nameservice')">Modifier</button>
+            <button type="button" class="btn btn-outline-dark" onclick="sendData('/Service/Delete','nameservice')">Supprimer</button>
+        </div>
+    }
     <style>
         /*Css du dossier Site, page Index*/
         .site > li:hover {

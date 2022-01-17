@@ -75,15 +75,27 @@ namespace annuaireEntreprise.Models
             
 
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            bool error = false;
             request = "DELETE FROM service WHERE id_service=@id";
             connection.Open();
             command = new MySqlCommand(request, connection);
             command.Parameters.Add(new MySqlParameter("@id", id));
-            command.ExecuteScalar();
+            try
+            {
+                command.ExecuteScalar();
+
+
+             //Si l'on essaie de supprimer un service surlequel des personnes sont affiliées, le sql renverra une erreur.
+            }catch (MySqlException)
+            {
+                error = true;
+            }
             command.Dispose();
             connection.Close();
+            //On retourne une erreur à la vue pour qu'elle puisse ensuite afficher un message.
+            return error;
         }
     }
 }

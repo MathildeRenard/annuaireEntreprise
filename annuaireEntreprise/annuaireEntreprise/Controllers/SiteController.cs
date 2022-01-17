@@ -11,11 +11,14 @@ namespace annuaireEntreprise.Controllers
     public class SiteController : Controller
     {
         // GET: SiteController
-        public IActionResult Index()
+        public IActionResult Index(string message)
         {
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
             ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
+            //message pour erreur de suppression
+            ViewData["message"] = message;
             Site site = new Site();
            
             return View(site.GetSites());
@@ -86,7 +89,11 @@ namespace annuaireEntreprise.Controllers
 
         {
             Site site = new Site();
-            site.Delete(id);
+            bool result = site.Delete(id);
+            if (result == true)
+            {
+                return RedirectToAction("Index", "Site", new { message = "Vous ne pouvez pas supprimer ce site car des personnes y sont affiliées." });
+            }
             return RedirectToAction("Index", "Site");
 
         }

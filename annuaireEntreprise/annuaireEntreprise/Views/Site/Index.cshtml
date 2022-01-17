@@ -24,6 +24,12 @@
 </ul>
 <form id="form" class="container" action='#' , method="post">
 </form>
+@if (ViewData["message"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewData["message"]
+    </div>
+}
 @if (ViewData["isLogged"] != null)
 {
     <div id="butons">
@@ -32,16 +38,16 @@
         <button type="button" class="btn btn-outline-dark" onclick="sendData('/Site/Delete','ville')">Supprimer</button>
     </div>
 }
-    <style>
-        /*Css du dossier Site, page Index*/
-        .site > li:hover {
-            cursor: pointer;
-            background-color: dimgray;
-            color: white;
-        }
+<style>
+    /*Css du dossier Site, page Index*/
+    .site > li:hover {
+        cursor: pointer;
+        background-color: dimgray;
+        color: white;
+    }
 
-        .site > li {
-            background-color: transparent;
-        }
-    </style>
+    .site > li {
+        background-color: transparent;
+    }
+</style>
 

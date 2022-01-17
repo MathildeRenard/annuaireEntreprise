@@ -11,11 +11,16 @@ namespace annuaireEntreprise.Controllers
     public class ServiceController : Controller
     {
         // GET: ServiceController1
-        public IActionResult Index()
+        public IActionResult Index(string message)
         {
+            //variables de session
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
             ViewData["isLogged"] = HttpContext.Session.GetString("isLogged");
+
+            //message d'erreur lors d'une suppression
+            ViewData["message"] = message;
+
             Service service = new Service();
 
             return View(service.GetServices());
@@ -81,7 +86,11 @@ namespace annuaireEntreprise.Controllers
 
         {
             Service service = new Service();
-            service.Delete(id);
+            bool result = service.Delete(id);
+            if (result == true)
+            {
+                return RedirectToAction("Index", "Service", new { message = "Vous ne pouvez pas supprimer ce service car des personnes y sont affiliées." });
+            }
             return RedirectToAction("Index", "Service");
 
         }
