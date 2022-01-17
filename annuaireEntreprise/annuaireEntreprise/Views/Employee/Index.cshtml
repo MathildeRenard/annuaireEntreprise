@@ -2,7 +2,7 @@
 @model List<Employee>
 
 <div class="input-group rounded d-flex">
-    <div class="flex-column">
+    <div class="flex-column" style="position:absolute">
         <h1 class="text-center">Rechercher un employé</h1>
         <div class="d-inline-flex">
             <input type="search" id="searchbar" onkeyup="search()" class="form-control rounded" placeholder="Search" aria-label="Search"
@@ -12,14 +12,14 @@
     </div>
 
     <div id="listeSites"></div>
-    <ul class="list-group list-group-flush my-5">
+    <ul class="list-group list-group-flush my-5" style=" width: 50%; top: 100px; position: inherit;">
 
         @foreach (Employee e in @Model)
         {
             <div class="site" onclick="deroulant(@e.IdEmployee)">
-            <li id="@e.IdEmployee" onclick="select('@e.IdEmployee')" class="list-group-item">
+            <li id="@e.IdEmployee" onclick="select('@e.IdEmployee')" class="list-group-item" style="display:flex;">
 
-                <p><div class="donnee">@e.Firstname</div></p>
+                <p><div class="donnee" style="margin-right:5%;">@e.Firstname</div></p>
                 <p><div class="donnee">@e.Lastname</div></p>
                 <i id="down" class="bi bi-caret-down-fill"></i><i id="up" class="bi bi-caret-up-fill" style="display:none"></i>
                 <ul id="informations+@e.IdEmployee" style="display:none">

@@ -31,6 +31,7 @@ namespace annuaireEntreprise.Models
             reader = command.ExecuteReader();
             while (reader.Read())
             {
+
                 Service service = new Service()
                 {
                     IdService = reader.GetInt32(0),
@@ -60,14 +61,18 @@ namespace annuaireEntreprise.Models
         }
         public void Update(string service, int id)
         {
-            request = "UPDATE service SET name_service=@nameService WHERE id_service=@id ";
-            connection.Open();
-            command = new MySqlCommand(request, connection);
-            command.Parameters.Add(new MySqlParameter("@nameService", service));
-            command.Parameters.Add(new MySqlParameter("@id", id));
-            command.ExecuteScalar();
-            command.Dispose();
-            connection.Close();
+
+            
+            
+                request = "UPDATE service SET name_service=@nameService WHERE id_service=@id ";
+                connection.Open();
+                command = new MySqlCommand(request, connection);
+                command.Parameters.Add(new MySqlParameter("@nameService", service));
+                command.Parameters.Add(new MySqlParameter("@id", id));
+                command.ExecuteScalar();
+                command.Dispose();
+                connection.Close();
+            
 
         }
         public void Delete(int id)

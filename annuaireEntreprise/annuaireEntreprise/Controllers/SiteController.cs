@@ -21,9 +21,10 @@ namespace annuaireEntreprise.Controllers
             return View(site.GetSites());
         }
 
-        public ActionResult Update(String ville,int id)
+        public ActionResult Update(String ville,int id,string message)
 
         {
+            ViewData["message"] = message;
             //envoyer le nom de la ville, et l'id récupérée par le formulaire, à la vue de modification
             ViewData["ville"] = ville;
             ViewData["id"] = id;
@@ -39,13 +40,24 @@ namespace annuaireEntreprise.Controllers
         public ActionResult sendChanges(string ville, int id)
 
         {
-            Site site = new Site();
-            site.Update(ville, id);
-            return RedirectToAction("Index","Site");
+            //s'il ya eu une erreur
+            if (ville == null)
+            {// envoyer actualliser le message dans la vue
+
+                return RedirectToAction("Update", "Site", new { message = "sasie incorrecte" });
+            }
+            else
+            {
+                Site site = new Site();
+                site.Update(ville, id);
+                return RedirectToAction("Index", "Site");
+            }
+           
         }
-        public ActionResult Add()
+        public ActionResult Add(string message)
 
         {
+            ViewData["message"] = message;
             //variables de sessions envoyée au layout(NavBar)
             ViewData["firstnameSession"] = HttpContext.Session.GetString("firstname");
             ViewData["lastnameSession"] = HttpContext.Session.GetString("lastname");
@@ -56,9 +68,18 @@ namespace annuaireEntreprise.Controllers
         public ActionResult sendNew(string ville)
 
         {
-            Site site = new Site();
-            site.Create(ville);
-            return RedirectToAction("Index", "Site");
+            //s'il ya eu une erreur
+            if (ville != null)
+            {
+                Site site = new Site();
+                site.Create(ville);
+                return RedirectToAction("Index", "Site");
+            }
+            else
+            {
+                return RedirectToAction("Add", "Site", new { message = "sasie incorrecte" });
+            }
+           
 
         }
         public ActionResult Delete(int id)
