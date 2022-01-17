@@ -132,11 +132,13 @@ namespace annuaireEntreprise.Controllers
                 HttpContext.Session.SetString("lastname", result.Lastname);
                 HttpContext.Session.SetString("isLogged", "true");
             }
+            else { return RedirectToAction("Login", "Employee",new { message = "saisies incorrectes"}); }
 
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Login()
+        public ActionResult Login(string message)
         {
+            ViewData["message"] = message;
             return View();
         }
         public ActionResult Result()
