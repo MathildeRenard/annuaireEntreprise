@@ -68,7 +68,7 @@ namespace annuaireEntreprise.Controllers
             if (nameservice == null)
             {// envoyer actualliser le message dans la vue
                 
-                return RedirectToAction("Update", "Service",new { message = "sasie incorrecte"});
+                return RedirectToAction("Update", "Service",new { message = "sasie incorrecte",id =id});
             }
             else
             {

@@ -44,7 +44,7 @@ namespace annuaireEntreprise.Controllers
             if (ville == null)
             {// envoyer actualliser le message dans la vue
 
-                return RedirectToAction("Update", "Site", new { message = "sasie incorrecte" });
+                return RedirectToAction("Update", "Site", new { message = "sasie incorrecte", id = id });
             }
             else
             {
