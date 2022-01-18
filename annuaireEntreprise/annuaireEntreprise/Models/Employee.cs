@@ -181,10 +181,38 @@ namespace annuaireEntreprise.Models
                 return employee;
             }
 
-        
-        public void Logout()
-        {
 
-        }
+        //Méthode à utiliser et à appeller par le développeur dans le but de créer un nouvel administrateur
+        
+        public void CreateAdmin(string Password,string LastName,string FirstName,string Mail)
+        {
+            
+            request = "INSERT INTO person ( firstname,lastname, Password, mail,phone,mobile_phone,id_site,id_service) values (@firstName, @lastName, @password, @mail,1,1,1,1)";
+            
+            connection = Db.Connection;
+            command = new MySqlCommand(request, connection);
+            
+            connection.Open();
+           
+                //Hashage du mot de passe
+                byte[] salt;
+                new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+                var pbkdf2 = new Rfc2898DeriveBytes(Password, salt, 100000);
+                byte[] hash = pbkdf2.GetBytes(20);
+                byte[] hashBytes = new byte[36];
+                Array.Copy(salt, 0, hashBytes, 0, 16);
+                Array.Copy(hash, 0, hashBytes, 16, 20);
+                string PasswordHash = Convert.ToBase64String(hashBytes);
+
+                command.Parameters.Add(new MySqlParameter("@password", PasswordHash));
+                command.Parameters.Add(new MySqlParameter("@lastName", LastName));
+                command.Parameters.Add(new MySqlParameter("@firstName", FirstName));
+                
+                command.Parameters.Add(new MySqlParameter("@mail", Mail));
+            command.ExecuteScalar();
+                
+                connection.Close();
+                connection.Open();
+            }
     }
 }

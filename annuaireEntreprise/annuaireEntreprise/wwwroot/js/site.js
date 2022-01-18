@@ -35,7 +35,7 @@ function select(id) {
 
 
 
-//fonction qui envoie le formulaire de modification lorsque l'on clique sur modifier
+//fonction qui envoie le formulaire de modification lorsque l'on clique sur modifier/supprimer
 function sendData(chemin,data) {
     var liste = document.getElementsByTagName('li');
     var taille = liste.length;
