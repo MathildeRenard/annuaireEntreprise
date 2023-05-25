@@ -54,7 +54,13 @@ namespace annuaireEntreprise
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "frame-ancestors 'self'; default-src 'self'; style-src 'self' https://cdn.jsdelivr.net; img-src 'self'; child-src 'none';");
+
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
