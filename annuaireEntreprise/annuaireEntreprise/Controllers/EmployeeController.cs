@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using annuaireEntreprise.Models;
 using annuaireEntreprise.ViewModels;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace annuaireEntreprise.Controllers
 {
@@ -23,7 +24,12 @@ namespace annuaireEntreprise.Controllers
 
             return View(employee.GetEmployees());
         }
+        private readonly IDistributedCache _cache;
 
+        public EmployeeController(IDistributedCache cache)
+        {
+            _cache = cache;
+        }
         public ActionResult Update(String firstname, string lastname, int phone, int mobilePhone, string mail, string service, string site, int idEmployee, int idservice, int idsite,string message)
 
         {
@@ -124,18 +130,39 @@ namespace annuaireEntreprise.Controllers
         // GET: EmployeesController1/Create
         public ActionResult SendLogin(string mail,string password)
         {
+            string ip = HttpContext.Connection.RemoteIpAddress.ToString();
+
+            var cacheEntry = _cache.GetString(ip);
+
+            int attemptCount = cacheEntry == null ? 0 : int.Parse(cacheEntry);
+
+            // Limit to 5 attempts every 15 minutes, for example
+            if (attemptCount >= 5)
+            {
+                return RedirectToAction("Login", "Employee", new { message = "Trop de tentatives de connexion. Veuillez réessayer ultérieurement." });
+            }
+
             Employee employee = new Employee();
             Employee result = employee.Login(mail, password);
+
             if (result != null)
             {
                 HttpContext.Session.SetString("firstname", result.Firstname);
                 HttpContext.Session.SetString("lastname", result.Lastname);
                 HttpContext.Session.SetString("isLogged", "true");
             }
-            else { return RedirectToAction("Login", "Employee",new { message = "saisies incorrectes"}); }
+            else
+            {
+                _cache.SetString(ip, (++attemptCount).ToString(), new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10)
+                });
+                return RedirectToAction("Login", "Employee", new { message = "Identifiant ou mot de passe incorrects." });
+            }
 
             return RedirectToAction("Index", "Home");
         }
+
         public ActionResult Login(string message)
         {
             ViewData["message"] = message;
