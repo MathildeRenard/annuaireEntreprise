@@ -1,31 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\renar\\Documents\\ProjetIndividuel\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj": {}
+    "C:\\Users\\mrena\\Documents\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj": {}
   },
   "projects": {
-    "C:\\Users\\renar\\Documents\\ProjetIndividuel\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj": {
+    "C:\\Users\\mrena\\Documents\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\renar\\Documents\\ProjetIndividuel\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj",
+        "projectUniqueName": "C:\\Users\\mrena\\Documents\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj",
         "projectName": "annuaireEntreprise",
-        "projectPath": "C:\\Users\\renar\\Documents\\ProjetIndividuel\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj",
-        "packagesPath": "C:\\Users\\renar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\renar\\Documents\\ProjetIndividuel\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\obj\\",
+        "projectPath": "C:\\Users\\mrena\\Documents\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise.csproj",
+        "packagesPath": "C:\\Users\\mrena\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mrena\\Documents\\annuaireEntreprise\\annuaireEntreprise\\annuaireEntreprise\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\renar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mrena\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
-          "https://www.nuget.org/api/v2": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -36,8 +37,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "MySql.Data": {
               "target": "Package",
@@ -50,7 +51,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
