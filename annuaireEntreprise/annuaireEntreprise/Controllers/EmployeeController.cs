@@ -155,7 +155,7 @@ namespace annuaireEntreprise.Controllers
             {
                 _cache.SetString(ip, (++attemptCount).ToString(), new DistributedCacheEntryOptions
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(10)
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15)
                 });
                 return RedirectToAction("Login", "Employee", new { message = "Identifiant ou mot de passe incorrects." });
             }
