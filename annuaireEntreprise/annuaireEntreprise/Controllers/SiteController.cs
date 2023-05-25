@@ -85,6 +85,8 @@ namespace annuaireEntreprise.Controllers
            
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
 
         {

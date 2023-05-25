@@ -65,7 +65,9 @@ namespace annuaireEntreprise.Controllers
             return View();
 
         }
-      
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult sendChanges(string nameservice, int id)
 
         {

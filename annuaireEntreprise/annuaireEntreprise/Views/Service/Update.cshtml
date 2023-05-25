@@ -1,6 +1,7 @@
 ﻿<div class="container">
     <h1 class="text-center">Modification service</h1>
     <form id="form" class="container" asp-controller="Service" asp-action="sendChanges" method="post">
+        @Html.AntiForgeryToken()
         <fieldset>
             <div id="formulaire" class="text-center d-flex flex-column m-auto">
 

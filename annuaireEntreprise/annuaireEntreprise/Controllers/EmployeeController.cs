@@ -128,6 +128,8 @@ namespace annuaireEntreprise.Controllers
 
         }
         // GET: EmployeesController1/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SendLogin(string mail,string password)
         {
             string ip = HttpContext.Connection.RemoteIpAddress.ToString();

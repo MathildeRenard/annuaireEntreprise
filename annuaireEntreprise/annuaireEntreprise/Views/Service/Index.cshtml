@@ -23,6 +23,7 @@
 
 </ul>
 <form id="form" class="container" action='@Url.Action("Delete", "Site")' , method="post">
+    @Html.AntiForgeryToken()
 </form>
 @if (ViewData["message"] != null)
             {
